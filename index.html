@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body  class="bg-[#F0FDF4] inter-font">
+<body class="bg-[#F0FDF4] inter-font">
 
     <header class="primary-bg">
         <nav class="navbar text-white containerr py-6">
@@ -32,7 +32,8 @@
                                 d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
-                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black">
+                    <ul tabindex="0"
+                        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-black">
                         <li><a class="text-base font-medium">About</a></li>
                         <li><a class="text-base font-medium">Gallery</a></li>
                         <li><a class="text-base font-medium">Plant a Tree</a></li>
@@ -52,6 +53,40 @@
             </div>
         </nav>
     </header>
+    <main>
+        <section class="hero py-12 md:py-24 banner">
+            <div class="hero-content text-center">
+                <div class="max-w-2xl">
+                    <h1 class="text-3xl md:text-5xl font-bold text-[rgba(31,41,55,1)]">Plant a Tree, Grow a Future</h1>
+                    <p class="pt-2 pb-6 text-[rgba(31,41,55,1)]">Join our mission to plant 1 million trees and make the
+                        Earth greener for future generations.</p>
+                    <button class="primary-btn">Get Involved</button>
+                </div>
+            </div>
+        </section>
+        <section class="containerr py-12 md:py-24">
+            <h2 class="text-center text-3xl font-semibold text-[rgba(31,41,55,1)] mb-10">Choose Your Trees</h2>
+            <article class="main-containerr">
+                <section class="">
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <div id="categories-buttons"></div>
+                </section>
+                <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-7 content-start"
+                    id="plant-cards">
+                </section>
+                <section class="cart-cont p-4 bg-white rounded-2xl">
+                    <h3 class="text-xl text-[rgba(0,0,0,1)] mb-2">Your Cart</h3>
+                    <div class="max-w-xl">
+                        <div id="cart-items"></div>
+                        <h4 id="cart-amount-field"
+                            class="primary-color font-medium justify-between border-t-2 border-[rgba(31,41,55,0.1)] mt-5 py-2 hidden">
+                            <span>Total :</span>
+                            <span id="cart-amount"></span>
+                        </h4>
+                    </div>
+                </section>
+            </article>
+    </main>
 
 
     <script src="script.js"></script>
