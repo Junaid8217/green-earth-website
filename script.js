@@ -74,3 +74,75 @@ function displayPlantCards(plants){
         plantCardCont.appendChild(card);
     }
 }
+
+// show modal
+async function fetchModal(plantId){
+    const url = `https://openapi.programming-hero.com/api/plant/${plantId}`;
+    const response = await fetch(url);
+    const json = await response.json();
+    displayModal(json.plants);
+}
+
+const displayModal = (plant) => {
+    const modalCont = document.getElementById('modal-content');
+    modalCont.innerHTML = `
+    <h2 class="font-bold text-3xl">${plant.name}</h2>
+    <div class="aspect-square">
+        <img src="${plant.image}" alt="${plant.name}" class="aspect-square rounded-lg" />
+    </div>
+    <h3 class="font-bold"> Category : <span class="font-normal">${plant.category}</h3>
+    <h3 class="font-bold"> Price : <span class="font-normal">${plant.price}</h3>
+    <h3 class="font-bold"> Description : <span class="font-normal">${plant.description}</h3>
+    `;
+    document.querySelector('#my_modal_5').showModal();
+}
+
+// add to cart
+function addToCart(item){
+    const card = document.querySelector(`.plant-card-${item}`);
+    const name = card.querySelector('.card-title').innerText;
+    const price = parseInt(card.querySelector('.plant-price').innerText.slice(1));
+    alert(name + ' has been added to the cart');
+    updateCart(name, price);
+}
+
+// update my cart
+const cartItemsCont = document.getElementById('cart-items');
+function updateCart(name, price){
+    const newItem = document.createElement('div');
+    newItem.classList.add('flex', 'justify-between', 'items-center', 'bg-[#F0FDF4]', 'py-2', 'px-3', 'mb-2', 'rounded-lg');
+    newItem.addEventListener('click', (e) => removeCartItem(e, price));
+    newItem.innerHTML = `
+    <div class="text-[rgba(31,41,55,1)]">
+        <h4 class="text-sm font-semibold mb-1">${name}</h4>
+        <p class="opacity-50">৳${price} x 1</p>
+    </div>
+    <i class="fa-solid fa-xmark text-2xl text-red-500 cursor-pointer opacity-70 hover:opacity-100"></i>
+    `;
+    cartItemsCont.appendChild(newItem);
+    // update total price after adding product
+    total += price;
+    updateCartBalance();
+}
+
+// remove cart items
+function removeCartItem(e, price){
+    if(e.target.classList.contains('fa-xmark')){
+        e.target.parentNode.remove();
+        // update total price after removing product
+        total -= price;
+        updateCartBalance();
+    }
+}
+
+// update total balance in cart
+let total = 0;
+const cartAmField = document.getElementById('cart-amount-field');
+function updateCartBalance(){
+    if(total === 0){
+        cartAmField.style.display = 'none';
+    } else{
+        cartAmField.style.display = 'flex';
+        document.querySelector('#cart-amount').innerHTML = `৳${total}`;
+    }
+}
